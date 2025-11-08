@@ -55,7 +55,8 @@ Edit `/etc/monit/monitrc` and add:
 set alert dummy@example.com
 
 check system $HOST
-  if loadavg (1min) > 1.2 then exec "/usr/local/bin/notify-telegram.sh '⚠️ High CPU Load on $(hostname)'"
+  if loadavg (5min) > 1.2 then exec "/usr/local/bin/notify-telegram.sh '⚠️ High CPU Load average (5min) on $(hostname)'"
+  if loadavg (15min) > 1.2 then exec "/usr/local/bin/notify-telegram.sh '⚠️ High CPU Load average (15min) on $(hostname)'"
   if memory usage > 80% then exec "/usr/local/bin/notify-telegram.sh '⚠️ High Memory Usage on $(hostname)'"
   if filesystem / usage > 85% then exec "/usr/local/bin/notify-telegram.sh '⚠️ Low Disk Space on $(hostname)'"
 ```
